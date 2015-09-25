@@ -4,10 +4,13 @@
  * This is the main class, it creates a window and 
  * initializes the JFrame.
  */
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
+import java.io.IOException;
 
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
 public class Main {
 
@@ -41,23 +44,29 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 500, 150);
+		frame.setBounds(100, 100, 500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		CustomJButton btnHello = new CustomJButton("Hello");
-		frame.getContentPane().add(btnHello);
-
+		frame.getContentPane().add(btnHello, BorderLayout.WEST);
+		
 		CustomJButton btnWorld = new CustomJButton("World");
-		frame.getContentPane().add(btnWorld);
+		frame.getContentPane().add(btnWorld, BorderLayout.EAST);
 
 		LoggingJEditorPane editorPane = new LoggingJEditorPane();
-		frame.getContentPane().add(editorPane);
+		frame.getContentPane().add(editorPane, BorderLayout.NORTH);
 
         JEditorPane coursePage = new JEditorPane();
         coursePage.setEditable(false);
-        coursePage.setPage("http://www.cs.tufts.edu/~jacob/86/syllabus.html");
-        frame.getContentPane().add(coursePage);
+        try {
+			coursePage.setPage("http://www.cs.tufts.edu/~jacob/86/syllabus.html");
+		} catch (IOException e) {
+			coursePage.setContentType("text/html");
+			coursePage.setText("<html> <body>Unable to load Course Home Page</body> </html>");
+		}
+        
+        JScrollPane scrollPane = new JScrollPane(coursePage);
+        frame.getContentPane().add(scrollPane);
 	}
 
 }
