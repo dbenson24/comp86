@@ -1,4 +1,3 @@
-package first;
 
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
