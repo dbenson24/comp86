@@ -38,9 +38,9 @@ public class Main {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 987, 669);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		CustomJButton btnHello = new CustomJButton("Hello");
-		frame.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		frame.getContentPane().add(btnHello);
 		
 		CustomJButton btnWorld = new CustomJButton("World");

@@ -11,7 +11,6 @@ import javax.swing.JEditorPane;
 public class LoggingJEditorPane extends JEditorPane implements ActionListener {
 
 	public LoggingJEditorPane() {
-		super();
 		trackKeyStrokes();
 	}
 

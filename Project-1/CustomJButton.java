@@ -9,7 +9,6 @@ import javax.swing.JButton;
 public class CustomJButton extends JButton implements ActionListener {
 
 	public CustomJButton() {
-		super();
 		addNameLogging();
 	}
 
@@ -41,7 +40,7 @@ public class CustomJButton extends JButton implements ActionListener {
 	
 	private void addNameLogging() {
 		timesClicked = 0;
-		String content = getText();
+		final String content = getText();
 		setName(content+" Button");
 		addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
