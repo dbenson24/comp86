@@ -1,4 +1,4 @@
-/*
+/**
  * Name: Derek Benson
  * Email: Derek.Benson@tufts.edu
  * This is the main class, it creates a window and 
