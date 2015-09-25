@@ -53,6 +53,11 @@ public class Main {
 
 		LoggingJEditorPane editorPane = new LoggingJEditorPane();
 		frame.getContentPane().add(editorPane);
+
+        JEditorPane coursePage = new JEditorPane();
+        coursePage.setEditable(false);
+        coursePage.setPage("http://www.cs.tufts.edu/~jacob/86/syllabus.html");
+        frame.getContentPane().add(coursePage);
 	}
 
 }
