@@ -1,4 +1,9 @@
-
+/*
+ * Name: Derek Benson
+ * Email: Derek.Benson@tufts.edu
+ * This is the main class, it creates a window and 
+ * initializes the JFrame.
+ */
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 

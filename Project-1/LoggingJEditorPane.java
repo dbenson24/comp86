@@ -1,4 +1,9 @@
-
+/*
+ * Name: Derek Benson
+ * Email: Derek.Benson@tufts.edu
+ * This is the LoggingEditorPane class, it prints any characters 
+ * that are entered into its text field to stdout.
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;

@@ -1,4 +1,9 @@
-
+/*
+ * Name: Derek Benson
+ * Email: Derek.Benson@tufts.edu
+ * This is the CustomJButton class, it alternates the button 
+ * text when it is clicked and prints the number of clicks to stdout.
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

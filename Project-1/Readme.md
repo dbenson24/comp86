@@ -1,6 +1,12 @@
 # Derek Benson - Project 1
 ## Comp 86 - 9/24/2015
 
+### Running and Compiling
+
+To build, execute: javac Main.java
+
+To run, execute: java Main
+
 ### This project contains 3 source files
 
 #### Main.java
