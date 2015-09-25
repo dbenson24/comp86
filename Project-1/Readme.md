@@ -12,8 +12,10 @@ To run, execute: java Main
 #### Main.java
 - Initializes the main loop of the program.
 - Builds the swing window and JFrame.
+- Uses a BorderLayout
 - Attaches the 2 buttons and the text input field.
-- Uses a FlowLayout
+- Attaches a second text input field that has input disabled.
+This field displays the Comp 86 Course Homepage from the website.
 
 #### CustomJButton.java
 - Extends the swing JButton class
