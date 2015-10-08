@@ -39,7 +39,7 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 800, 450);
+		frame.setBounds(100, 100, 1366, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 

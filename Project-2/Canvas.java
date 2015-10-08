@@ -49,14 +49,16 @@ public class Canvas extends JPanel {
 	    super.paintComponent(g);
 	    BufferedImage img = null;
 	    try {
-	    	File test = new File("E:\\Workspace\\comp86\\Project-2\\cloud.png");
-	    	System.out.println(test.exists());
-	    	System.out.println(test);
-	        img = ImageIO.read(new File("E:\\Workspace\\comp86\\Project-2\\cloud.png"));
+	    	System.out.println();
+	    	File wd = new File(System.getProperty("user.dir"));
+	        img = ImageIO.read(new File(wd, "cloud.png"));
 	    } catch (IOException e) {
 	    	System.out.println("Ioexception");
 	    }
-	    g.drawImage(img, 250, 250, null);
+	    g.drawImage(img, 50, 300, null);
+	    g.drawImage(img, 350, 375, null);
+	    g.drawImage(img, 1000, 50, null);
+	    g.drawImage(img, 900, 400, null);
 		g.fillPolygon(uav);
 	}
 	
