@@ -1,12 +1,20 @@
-
+/**
+ * File: DirectionButton.java
+ * Date: Oct 7, 2015
+ * Author: Derek
+ * Email: Derek.Benson@tufts.edu
+ * Description:
+ * DirectionalButton extends JButton and enables
+ * a button to control a UAV on the target Canvas.
+ * It defaults to making the UAV move 25 pixels at
+ * a time but an optional parameter magnitude allows
+ * that value to be customized.
+ */
 
 import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Action;
-import javax.swing.Icon;
 import javax.swing.JButton;
 
 public class DirectionalButton extends JButton {
@@ -57,7 +65,7 @@ public class DirectionalButton extends JButton {
 	private void onClick () {
 		addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(change);
+				System.out.println("Button: "+ getText() + " -> " + change);
 				target.getUAV().translate(change.x, change.y);
 				target.refresh();
 			}

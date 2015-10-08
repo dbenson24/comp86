@@ -1,8 +1,18 @@
+/**
+ * File: Canvas.java
+ * Date: Oct 7, 2015
+ * Author: Derek
+ * Email: Derek.Benson@tufts.edu
+ * Description:
+ * This file implements the Canvas object.
+ * A Canvas extends JPanel and draws onto itself
+ * a number of clouds as well as a UAV for someone
+ * to pilot.
+ */
+
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.LayoutManager;
-import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -21,23 +31,33 @@ public class Canvas extends JPanel {
 		hasParent = false;
 		setBackground(Color.CYAN);
 	}
-
+	
+	public Canvas(JFrame parent){
+		uav = new UAV();
+		this.parent = parent;
+		this.hasParent = true;
+		setBackground(Color.CYAN);
+	}
+	
 	public Canvas(LayoutManager arg0) {
 		super(arg0);
 		uav = new UAV();
 		hasParent = false;
+		setBackground(Color.CYAN);
 	}
 
 	public Canvas(boolean arg0) {
 		super(arg0);
 		uav = new UAV();
 		hasParent = false;
+		setBackground(Color.CYAN);
 	}
 
 	public Canvas(LayoutManager arg0, boolean arg1) {
 		super(arg0, arg1);
 		uav = new UAV();
 		hasParent = false;
+		setBackground(Color.CYAN);
 	}
 	
 	public UAV getUAV() {

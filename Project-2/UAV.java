@@ -1,3 +1,13 @@
+/**
+ * File: UAV.java
+ * Date: Oct 7, 2015
+ * Author: Derek
+ * Email: Derek.Benson@tufts.edu
+ * Description:
+ * UAV extends Polygon and provides a
+ * polygon in the shape of a UAV.
+ */
+
 import java.awt.Polygon;
 
 public class UAV extends Polygon {
@@ -7,6 +17,7 @@ public class UAV extends Polygon {
 				{0,115},{0,140},{20,160},{140,160},{140,240},
 				{200,270},{215,250},{205,230},{180,210},{180,160},
 				{300,160},{320,140},{320,115},{280,85},{180,85},{180,25}};
+		
 		for (int[] point : points){
 			this.addPoint(point[0], point[1]);
 		}

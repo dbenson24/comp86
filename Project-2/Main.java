@@ -1,11 +1,19 @@
+/**
+ * File: Main.java
+ * Date: Oct 7, 2015
+ * Author: Derek
+ * Email: Derek.Benson@tufts.edu
+ * Description:
+ * This file sets up the main execution loop and
+ * initializes all of the JPanels and buttons.
+ */
+
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import java.awt.Color;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Main {
 
@@ -43,8 +51,7 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 
-		Canvas canvas = new Canvas();
-		canvas.setParent(frame);
+		Canvas canvas = new Canvas(frame);
 		frame.getContentPane().add(canvas, BorderLayout.CENTER);
 		
 		JPanel directionalButtons = new JPanel();
