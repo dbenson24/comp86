@@ -50,7 +50,7 @@ button to stdout and translates the UAV.
 - DirectionalButton inherits from javax.swing.JButton
 
 ## Aggregation Hierarchy
-### Each of these classes references:
+### Each of these classes reference:
 
 #### Main
 - JFrame
