@@ -11,7 +11,6 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -54,19 +53,20 @@ public class Main {
 		Canvas canvas = new Canvas(frame);
 		frame.getContentPane().add(canvas, BorderLayout.CENTER);
 		
+		/* Used to group the buttons together at the bottom */
 		JPanel directionalButtons = new JPanel();
 		frame.getContentPane().add(directionalButtons, BorderLayout.SOUTH);
 		
-		JButton leftButton = new DirectionalButton("Left", canvas);
+		DirectionalButton leftButton = new DirectionalButton("Left", canvas);
 		directionalButtons.add(leftButton);
 		
-		JButton upButton = new DirectionalButton("Up", canvas);
+		DirectionalButton upButton = new DirectionalButton("Up", canvas);
 		directionalButtons.add(upButton);
 		
-		JButton downButton = new DirectionalButton("Down", canvas);
+		DirectionalButton downButton = new DirectionalButton("Down", canvas);
 		directionalButtons.add(downButton);
 		
-		JButton rightButton = new DirectionalButton("Right", canvas);
+		DirectionalButton rightButton = new DirectionalButton("Right", canvas);
 		directionalButtons.add(rightButton);
 		
 	}

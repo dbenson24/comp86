@@ -20,7 +20,7 @@ import javax.swing.JButton;
 public class DirectionalButton extends JButton {
 	private Point change;
 	private Canvas target;
-	
+
 	public DirectionalButton(String text, Canvas target) {
 		super(text);
 		this.target = target;
@@ -37,11 +37,9 @@ public class DirectionalButton extends JButton {
 		case "Right":
 			change = new Point(25, 0);
 		}
-		System.out.println(change);
-		System.out.println(this.target);
 		onClick();
 	}
-	
+
 	// WARNING using a negative magnitude will invert controls
 	public DirectionalButton(String text, Canvas target, int magnitude) {
 		super(text);
@@ -61,10 +59,11 @@ public class DirectionalButton extends JButton {
 		}
 		onClick();
 	}
-	
+
 	private void onClick () {
 		addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				/* Log and then translate the UAV */
 				System.out.println("Button: "+ getText() + " -> " + change);
 				target.getUAV().translate(change.x, change.y);
 				target.refresh();

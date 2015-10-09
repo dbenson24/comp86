@@ -25,20 +25,20 @@ public class Canvas extends JPanel {
 	private UAV uav;
 	private JFrame parent;
 	private boolean hasParent;
-	
+
 	public Canvas() {
 		uav = new UAV();
 		hasParent = false;
 		setBackground(Color.CYAN);
 	}
-	
+
 	public Canvas(JFrame parent){
 		uav = new UAV();
 		this.parent = parent;
 		this.hasParent = true;
 		setBackground(Color.CYAN);
 	}
-	
+
 	public Canvas(LayoutManager arg0) {
 		super(arg0);
 		uav = new UAV();
@@ -59,11 +59,11 @@ public class Canvas extends JPanel {
 		hasParent = false;
 		setBackground(Color.CYAN);
 	}
-	
+
 	public UAV getUAV() {
 		return uav;
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 	    super.paintComponent(g);
@@ -73,7 +73,7 @@ public class Canvas extends JPanel {
 	    	File wd = new File(System.getProperty("user.dir"));
 	        img = ImageIO.read(new File(wd, "cloud.png"));
 	    } catch (IOException e) {
-	    	System.out.println("Ioexception");
+	    	System.out.println("cloud.png was not found, clouds will not be displayed");
 	    }
 	    g.drawImage(img, 50, 300, null);
 	    g.drawImage(img, 350, 375, null);
@@ -81,12 +81,12 @@ public class Canvas extends JPanel {
 	    g.drawImage(img, 900, 400, null);
 		g.fillPolygon(uav);
 	}
-	
+
 	public void setParent(JFrame parent) {
 		this.parent = parent;
 		hasParent = true;
 	}
-	
+
 	public void refresh() {
 		if (hasParent) {
 			parent.revalidate();
