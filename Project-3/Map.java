@@ -1,11 +1,11 @@
 /**
- * File: Canvas.java
+ * File: Map.java
  * Date: Oct 7, 2015
  * Author: Derek
  * Email: Derek.Benson@tufts.edu
  * Description:
- * This file implements the Canvas object.
- * A Canvas extends JPanel and draws onto itself
+ * This file implements the Map object.
+ * A Map extends JPanel and draws onto itself
  * a number of clouds as well as a UAV for someone
  * to pilot.
  */
@@ -21,39 +21,39 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Canvas extends JPanel {
+public class Map extends JPanel {
 	private UAV uav;
 	private JFrame parent;
 	private boolean hasParent;
 
-	public Canvas() {
+	public Map() {
 		uav = new UAV();
 		hasParent = false;
 		setBackground(Color.CYAN);
 	}
 
-	public Canvas(JFrame parent){
+	public Map(JFrame parent){
 		uav = new UAV();
 		this.parent = parent;
 		this.hasParent = true;
 		setBackground(Color.CYAN);
 	}
 
-	public Canvas(LayoutManager arg0) {
+	public Map(LayoutManager arg0) {
 		super(arg0);
 		uav = new UAV();
 		hasParent = false;
 		setBackground(Color.CYAN);
 	}
 
-	public Canvas(boolean arg0) {
+	public Map(boolean arg0) {
 		super(arg0);
 		uav = new UAV();
 		hasParent = false;
 		setBackground(Color.CYAN);
 	}
 
-	public Canvas(LayoutManager arg0, boolean arg1) {
+	public Map(LayoutManager arg0, boolean arg1) {
 		super(arg0, arg1);
 		uav = new UAV();
 		hasParent = false;
@@ -80,7 +80,7 @@ public class Canvas extends JPanel {
 	    g.drawImage(img, 350, 375, null);
 	    g.drawImage(img, 1000, 50, null);
 	    g.drawImage(img, 900, 400, null);
-		g.fillPolygon(uav);
+		uav.draw(g);
 	}
 
 	public void setParent(JFrame parent) {
