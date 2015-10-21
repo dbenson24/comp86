@@ -8,7 +8,9 @@
  * polygon in the shape of a UAV.
  */
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Polygon;
 
 public class UAV extends Plane {
@@ -25,20 +27,50 @@ public class UAV extends Plane {
 		makePolygon();
 	}
 	
+	public UAV(boolean active){
+		super(active);
+		makePolygon();
+	}
+	
+	public UAV(boolean active, int x, int y) {
+		super(active, x, y);
+		makePolygon();
+	}
+	
 	private void makePolygon() {
 		shape = new Polygon();
-		int[][] points = {{0,0},{-20,25},{-20,85},{-120,85},{-160,115},{-160,140},{-140,160},{-20,160},{-20,240},{40,270},{55,250},{45,230},{20,210},{20,160},{140,160},{160,140},{160,115},{120,85},{20,85},{20,25}};
+		int[][] points = {{0,0},{-4,5},{-4,17},{-24,17},{-32,23},{-32,28},{-28,32},{-4,32},{-4,48},{8,54},{11,50},{9,46},{4,42},{4,32},{28,32},{32,28},{32,23},{24,17},{4,17},{4,5}};
 		
 		for (int[] point : points){
 			shape.addPoint(point[0] + x, point[1] + y);
 		}
 	}
 	
+	public boolean contains(Point p){
+		return shape.contains(p);
+	}
+	
 	public void translate(int dx, int dy) {
+		x = x + dx;
+		y = y + dy;
 		shape.translate(dx, dy);
 	}
 	
 	public void draw(Graphics g){
-		g.fillPolygon(shape);
+		if (active) {
+			Color temp = g.getColor();
+			g.setColor(Color.RED);
+			g.fillPolygon(shape);
+			g.setColor(temp);
+		} else {
+			g.fillPolygon(shape);
+		}
+		
+		int lineHeight = 13;
+		
+		g.drawString("Dir: " + direction, x+35, y);
+		g.drawString("Alt: " + altitude, x+35, y+lineHeight);
+		g.drawString("Speed: " + speed, x+35, y+2*lineHeight);
+		
 	}
 }

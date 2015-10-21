@@ -13,55 +13,64 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.LayoutManager;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Map extends JPanel {
-	private UAV uav;
+	private Plane current;
+	private ArrayList<Plane> planes;
 	private JFrame parent;
 	private boolean hasParent;
 
 	public Map() {
-		uav = new UAV();
-		hasParent = false;
-		setBackground(Color.CYAN);
+		init();
 	}
 
 	public Map(JFrame parent){
-		uav = new UAV();
+		init();
 		this.parent = parent;
-		this.hasParent = true;
-		setBackground(Color.CYAN);
+		hasParent = true;
 	}
 
 	public Map(LayoutManager arg0) {
 		super(arg0);
-		uav = new UAV();
-		hasParent = false;
-		setBackground(Color.CYAN);
+		init();
 	}
 
 	public Map(boolean arg0) {
 		super(arg0);
-		uav = new UAV();
-		hasParent = false;
-		setBackground(Color.CYAN);
+		init();
 	}
 
 	public Map(LayoutManager arg0, boolean arg1) {
 		super(arg0, arg1);
-		uav = new UAV();
-		hasParent = false;
-		setBackground(Color.CYAN);
+		init();
 	}
 
-	public UAV getUAV() {
-		return uav;
+	private void init() {
+		current = new UAV(true);
+		planes = new ArrayList();
+		planes.add(current);
+		planes.add(new UAV(100, 100));
+		planes.add(new UAV(200, 200));
+		hasParent = false;
+		setBackground(Color.CYAN);
+		onClick();
+	}
+	
+	public Plane getCurrent() {
+		return current;
 	}
 
 	@Override
@@ -80,7 +89,9 @@ public class Map extends JPanel {
 	    g.drawImage(img, 350, 375, null);
 	    g.drawImage(img, 1000, 50, null);
 	    g.drawImage(img, 900, 400, null);
-		uav.draw(g);
+	    for (Plane plane : planes) {
+	    	plane.draw(g);
+	    }
 	}
 
 	public void setParent(JFrame parent) {
@@ -97,4 +108,22 @@ public class Map extends JPanel {
 			repaint();
 		}
 	}
+	
+	private void onClick () {
+		 addMouseListener(new MouseAdapter() {
+		     @Override
+		     public void mousePressed(MouseEvent e) {
+		    	 Point p = e.getPoint();
+		    	 for (Plane plane : planes) {
+		    		 if (plane.contains(p)) {
+		    			 current.setActive(false);
+		    			 current = plane;
+		    			 current.setActive(true);
+		    			 refresh();
+		    		 }
+		    	 }
+		     }
+		  });
+	}
+	
 }

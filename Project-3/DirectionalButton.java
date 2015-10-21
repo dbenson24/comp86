@@ -65,7 +65,7 @@ public class DirectionalButton extends JButton {
 			public void actionPerformed(ActionEvent e) {
 				/* Log and then translate the UAV */
 				System.out.println("Button: "+ getText() + " -> " + change);
-				target.getUAV().translate(change.x, change.y);
+				target.getCurrent().translate(change.x, change.y);
 				target.refresh();
 			}
 		});
