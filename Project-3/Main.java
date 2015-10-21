@@ -1,3 +1,4 @@
+
 /**
  * File: Main.java
  * Date: Oct 7, 2015
@@ -48,27 +49,26 @@ public class Main {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1366, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 
 		Map map = new Map(frame);
 		frame.getContentPane().add(map, BorderLayout.CENTER);
-		
+
 		/* Used to group the buttons together at the bottom */
 		JPanel directionalButtons = new JPanel();
 		frame.getContentPane().add(directionalButtons, BorderLayout.SOUTH);
-		
+
 		DirectionalButton leftButton = new DirectionalButton("Left", map);
 		directionalButtons.add(leftButton);
-		
+
 		DirectionalButton upButton = new DirectionalButton("Up", map);
 		directionalButtons.add(upButton);
-		
+
 		DirectionalButton downButton = new DirectionalButton("Down", map);
 		directionalButtons.add(downButton);
-		
+
 		DirectionalButton rightButton = new DirectionalButton("Right", map);
 		directionalButtons.add(rightButton);
-		
+
 	}
 
 }

@@ -1,3 +1,4 @@
+
 /**
  * File: DirectionButton.java
  * Date: Oct 7, 2015
@@ -60,13 +61,17 @@ public class DirectionalButton extends JButton {
 		onClick();
 	}
 
-	private void onClick () {
+	private void onClick() {
 		addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				/* Log and then translate the UAV */
-				System.out.println("Button: "+ getText() + " -> " + change);
-				target.getCurrent().translate(change.x, change.y);
-				target.refresh();
+				if (target.getCurrent() != null) {
+					System.out.println("Button: " + getText() + " -> " + change);
+					target.getCurrent().translate(change.x, change.y);
+					target.refresh();
+				} else {
+					System.out.println("There is no current target");
+				}
 			}
 		});
 	}
