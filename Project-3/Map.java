@@ -67,9 +67,9 @@ public class Map extends JPanel {
 			int randX = ThreadLocalRandom.current().nextInt(0, 1366);
 			int randY = ThreadLocalRandom.current().nextInt(0, 768);
 			Plane temp = new UAV(randX, randY);
-			temp.setAltitude(ThreadLocalRandom.current().nextInt(0, 50000));
-			temp.setSpeed(ThreadLocalRandom.current().nextInt(250, 650));
-			temp.setDirection(ThreadLocalRandom.current().nextInt(0, 360));
+			temp.setAltitude(ThreadLocalRandom.current().nextInt(0, 100));
+			temp.setSpeed(ThreadLocalRandom.current().nextInt(0, 100));
+			temp.setDirection(ThreadLocalRandom.current().nextInt(0, 100));
 			temp.setID(ThreadLocalRandom.current().nextInt(0, 999999));
 			planes.add(temp);
 		}
