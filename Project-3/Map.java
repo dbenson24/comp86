@@ -70,6 +70,7 @@ public class Map extends JPanel {
 			temp.setAltitude(ThreadLocalRandom.current().nextInt(0, 50000));
 			temp.setSpeed(ThreadLocalRandom.current().nextInt(250, 650));
 			temp.setDirection(ThreadLocalRandom.current().nextInt(0, 360));
+			temp.setID(ThreadLocalRandom.current().nextInt(0, 999999));
 			planes.add(temp);
 		}
 		hasParent = false;
@@ -89,14 +90,13 @@ public class Map extends JPanel {
 			System.out.println();
 			File wd = new File(System.getProperty("user.dir"));
 			img = ImageIO.read(new File(wd, "cloud.png"));
+			g.drawImage(img, 50, 300, null);
+			g.drawImage(img, 350, 375, null);
+			g.drawImage(img, 1000, 50, null);
+			g.drawImage(img, 900, 400, null);
 		} catch (IOException e) {
 			System.out.println("cloud.png was not found, clouds will not be displayed");
 		}
-
-		g.drawImage(img, 50, 300, null);
-		g.drawImage(img, 350, 375, null);
-		g.drawImage(img, 1000, 50, null);
-		g.drawImage(img, 900, 400, null);
 		for (Plane plane : planes) {
 			plane.draw(g);
 		}

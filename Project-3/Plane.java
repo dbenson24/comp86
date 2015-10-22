@@ -14,7 +14,7 @@ import java.awt.Point;
 
 public abstract class Plane {
 
-	protected int x, y, direction, speed, altitude;
+	protected int x, y, direction, speed, altitude, id;
 
 	protected boolean active;
 
@@ -25,16 +25,27 @@ public abstract class Plane {
 		direction = 0;
 		speed = 0;
 		altitude = 0;
+		id = 0;
 	}
 
 	Plane(boolean active) {
 		this.active = active;
+		x = 0;
+		y = 0;
+		direction = 0;
+		speed = 0;
+		altitude = 0;
+		id = 0;
 	}
 
 	Plane(boolean active, int x, int y) {
 		this.active = active;
 		this.x = x;
 		this.y = y;
+		direction = 0;
+		speed = 0;
+		altitude = 0;
+		id = 0;
 	}
 
 	public void translate(int dx, int dy) {
@@ -69,7 +80,15 @@ public abstract class Plane {
 	public int getDirection() {
 		return direction;
 	}
-
+	
+	public void setID(int id) {
+		this.id = id;
+	}
+	
+	public int getID() {
+		return id;
+	}
+	
 	abstract void draw(Graphics g);
 
 	abstract boolean contains(Point p);
