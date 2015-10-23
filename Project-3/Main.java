@@ -14,10 +14,6 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JSlider;
-import javax.swing.ButtonGroup;
-import javax.swing.JComboBox;
 
 public class Main {
 
@@ -61,8 +57,8 @@ public class Main {
 		JPanel directionalButtons = new JPanel();
 		frame.getContentPane().add(directionalButtons, BorderLayout.SOUTH);
 		
-		AttributeController ac = new AttributeController();
-		ac.setTarget(map);
+		/* Used to group the combobox and slider together */
+		AttributeController ac = new AttributeController(map);
 		directionalButtons.add(ac);
 
 		DirectionalButton leftButton = new DirectionalButton("Left", map);

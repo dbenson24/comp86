@@ -2,11 +2,7 @@ import java.awt.Graphics;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -14,9 +10,14 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * File: AttributeController.java Date: Oct 21, 2015 Author: Derek Email:
- * Derek.Benson@tufts.edu Description: TODO
- *
+ * File: AttributeController.java 
+ * Date: Oct 21, 2015 
+ * Author: Derek 
+ * Email: Derek.Benson@tufts.edu 
+ * Description:
+ * The AttributeController is a flow layout JPanel that can be used to adjust
+ * the attributes of a plane. A combobox allows a user to select either speed,
+ * altitude, or direction and a slider allows the user to adjust the selected value.
  */
 
 public class AttributeController extends JPanel {
@@ -32,7 +33,17 @@ public class AttributeController extends JPanel {
 	public AttributeController() {
 		init();
 	}
+	
+	/**
+	 * @param target
+	 */
 
+	public AttributeController(Map target) {
+		super();
+		init();
+		this.target = target;
+	}
+	
 	/**
 	 * @param layout
 	 */
@@ -127,6 +138,7 @@ public class AttributeController extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		/* Make sure that the slider represents the state of the current plane */
 		if(target.getCurrent() != null) {
 			switch ((String)comboBox.getSelectedItem()) {
 			case "altitude":

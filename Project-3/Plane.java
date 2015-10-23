@@ -6,7 +6,7 @@
  * Email: Derek.Benson@tufts.edu
  * Description:
  * Plane is an abstract class that represents a drawable plane.
- * Protect variables include it's x and y location in pixels on the canvas,
+ * Protected variables include it's x and y location in pixels on the canvas,
  * it's current direction, speed, and altitude as an integer out of 100, 
  * and an integer id which is supposed to be able to uniquely identify the plane.
  */

@@ -7,16 +7,14 @@
  * Description:
  * This file implements the Map object.
  * A Map extends JPanel and draws onto itself
- * a number of clouds as well as a UAV for someone
- * to pilot.
+ * a number of clouds as well as 8 randomly positioned
+ * UAVs for the user to pilot.
  */
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.LayoutManager;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -62,7 +60,7 @@ public class Map extends JPanel {
 
 	private void init() {
 		current = null;
-		planes = new ArrayList();
+		planes = new ArrayList<Plane>();
 		for (int i = 0; i < 8; i++) {
 			int randX = ThreadLocalRandom.current().nextInt(0, 1366);
 			int randY = ThreadLocalRandom.current().nextInt(0, 768);

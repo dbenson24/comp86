@@ -5,8 +5,10 @@
  * Author: Derek
  * Email: Derek.Benson@tufts.edu
  * Description:
- * UAV extends Polygon and provides a
- * polygon in the shape of a UAV.
+ * UAV extends Plane and provides a
+ * Plane in the shape of a UAV. Drawing is implemented
+ * through a single Polygon. The polygon is also used
+ * for translations. 
  */
 
 import java.awt.Color;
