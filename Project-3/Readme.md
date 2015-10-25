@@ -49,8 +49,8 @@ button to stdout and translates the UAV.
 - Extends the swing JPanel class.
 - This class overrides the paintComponent to keep the slider's selected value
 up to date with the currently selected plane.
-- The combobox allows a user to select which attribute the slider is currently
-affecting and the slider allows a user to adjust the currently selected value
+- The ComboBox allows a user to select which attribute the JSlider is currently
+affecting and the JSlider allows a user to adjust the currently selected value
 for the currently selected plane.
 
 ## Inheritance Hierarchy
