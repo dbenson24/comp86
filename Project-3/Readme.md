@@ -106,3 +106,48 @@ for the currently selected plane.
 - JComboBox
 - JSlider
 - Map
+
+## Uses
+
+- UAV.java relies on Polygon to keep track of all of the points
+needed to draw the UAV, as well as for handling drawing of the points,
+and translation.
+- DirectionalButton.java uses a Point to keep track of how a target
+should be translated when one of the button is pressed.
+- DirectionalButton.java also relies on Map to determine which plane
+the button is supposed to be affecting when it is pushed.
+- AttributeController uses a ComboBox and a Slider to handle visually
+presenting the user the controls.
+- AttributeController also relies on Map to get the currently selected
+plane so that the controls can affect it.
+
+## Secret Hiding
+#### Main
+- JFrame frame
+
+#### Map
+- Plane current
+- ArrayList<Plane> planes
+- JFrame parent
+- boolean hasParent
+
+#### Plane
+- int x
+- int y
+- int direction
+- int speed
+- int altitude
+- int id
+- boolean active
+
+#### UAV
+- Polygon shape
+
+#### DirectionalButton
+- Map target
+- Point change
+
+#### AttributeController
+- JComboBox<String> comboBox
+- JSlider slider
+- Map target
