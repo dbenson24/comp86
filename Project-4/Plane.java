@@ -106,7 +106,6 @@ public abstract class Plane {
 		double radians = Math.toRadians((double)direction / 100.0 * 359.0);
 		int dy = (int)((double)speed / 100 * maxSpeed * Math.cos(radians) / 20.0);
 		int dx = (int)((double)speed / 100 * maxSpeed * Math.sin(radians) / 20.0);
-		System.out.println("dx: " + dx + " dy: " + dy + " speed: " + speed + " direction: " + direction);
 		this.translate(dx, -dy);
 	}
 	

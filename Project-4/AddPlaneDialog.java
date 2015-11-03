@@ -11,12 +11,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 /**
- * File: AddPlaneDialog.java
- * Date: Nov 3, 2015
- * Author: Derek
- * Email: Derek.Benson@tufts.edu
- * Description:
- * TODO
+ * File: AddPlaneDialog.java Date: Nov 3, 2015 Author: Derek Email:
+ * Derek.Benson@tufts.edu Description: TODO
  *
  */
 
@@ -30,7 +26,7 @@ public class AddPlaneDialog extends JDialog {
 	private JTextField XField;
 	private JTextField YField;
 	private Map target;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -115,21 +111,25 @@ public class AddPlaneDialog extends JDialog {
 			{
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						int x = Integer.parseInt(XField.getText());
-						int y = Integer.parseInt(YField.getText());
-						int altitude = Integer.parseInt(AltitudeField.getText());
-						if( altitude > 65000) {
-							altitude = 65000;
-						}
-						altitude = altitude * 100 / 65000;
-						int maxSpeed = Integer.parseInt(MaxSpeedField.getText());
-						int speed = Integer.parseInt(SpeedField.getText());
-						speed = speed * 100 / maxSpeed;
-						int direction = Integer.parseInt(DirectionField.getText());
-						direction = (direction % 360) * 100 / 359;
-						if(target != null) {
-							target.addPlane(x, y, altitude, speed, maxSpeed, direction);
+					public void actionPerformed(ActionEvent event) {
+						try {
+							int x = Integer.parseInt(XField.getText());
+							int y = Integer.parseInt(YField.getText());
+							int altitude = Integer.parseInt(AltitudeField.getText());
+							if (altitude > 65000) {
+								altitude = 65000;
+							}
+							altitude = altitude * 100 / 65000;
+							int maxSpeed = Integer.parseInt(MaxSpeedField.getText());
+							int speed = Integer.parseInt(SpeedField.getText());
+							speed = speed * 100 / maxSpeed;
+							int direction = Integer.parseInt(DirectionField.getText());
+							direction = (direction % 360) * 100 / 359;
+							if (target != null) {
+								target.addPlane(x, y, altitude, speed, maxSpeed, direction);
+							}
+						} catch (NumberFormatException e) {
+							System.out.println("You must enter integers when you create the plane");
 						}
 						dispose();
 					}
