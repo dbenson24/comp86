@@ -3,11 +3,11 @@
 
 ## Running and Compiling
 
-To build, execute: javac Main.java
+To build, execute: ```javac *.java```
 
-To run, execute: java Main
+To run, execute: ```java Main```
 
-## This project contains 6 source files
+## This project contains 8 source files
 
 #### Main.java
 - Initializes the main loop of the program.
@@ -20,9 +20,9 @@ To run, execute: java Main
 - Defines the abstract class to represent a plane
 - Provides get and set methods for the protected variables
 altitude, id, speed, direction, and the plane's active state.
-- Plane also requires that any implementation define the draw method 
+- Plane also requires that any implementation define the draw method
 so that the plane can be displayed, it also requires a contains method
-to make sure that other modules will be able to determine if a 2d point 
+to make sure that other modules will be able to determine if a 2d point
 is inside of the plane.
 
 #### UAV.java
@@ -53,6 +53,19 @@ up to date with the currently selected plane.
 affecting and the JSlider allows a user to adjust the currently selected value
 for the currently selected plane.
 
+#### AddPlaneDialog.java
+- Extends the swing JDialog class.
+- This class creates a small dialog that allows a user to specify parameters
+in order to create a new plane.
+
+#### MapMenuBar.java
+- Extends the swing MenuBar class.
+- THis class creates a menu bar at the top to give the user access to some
+extra functionality. Included in it is the File menu to close the program and
+the Edit menu with the option to Add a Plane, Remove Current Plane, Pause, or Play.
+- The Play and Pause menu items are enabled or disabled depending on whether or
+not the animation is running.
+
 ## Inheritance Hierarchy
 
 #### Main
@@ -72,6 +85,13 @@ for the currently selected plane.
 
 #### AttributeController
 - AttributeController inherits from javax.swing.JPanel
+
+#### AddPlaneDialog.java
+- AddPlaneDialog inherits from javax.swing.JDialog
+
+#### MapMenuBar.java
+- MapMenuBar inherits from javax.swing.MenuBar
+
 
 ## Aggregation Hierarchy
 ### Each of these classes reference:
@@ -107,6 +127,18 @@ for the currently selected plane.
 - JSlider
 - Map
 
+#### MapMenuBar
+- JMenu
+- JMenuItem
+- Map
+- ActionListener
+
+#### AddPlaneDialog
+- JLabel
+- JTextField
+- JButton
+- Map
+
 ## Uses
 
 - UAV.java relies on Polygon to keep track of all of the points
@@ -120,6 +152,8 @@ the button is supposed to be affecting when it is pushed.
 presenting the user the controls.
 - AttributeController also relies on Map to get the currently selected
 plane so that the controls can affect it.
+- All classes that interact with the Map rely on storing the Map in a variable
+and calling methods on that Map instance.
 
 ## Secret Hiding
 #### Main
@@ -130,6 +164,8 @@ plane so that the controls can affect it.
 - ArrayList<Plane> planes
 - JFrame parent
 - boolean hasParent
+- timer clock
+- TimerTask animate
 
 #### Plane
 - int x
@@ -151,3 +187,16 @@ plane so that the controls can affect it.
 - JComboBox<String> comboBox
 - JSlider slider
 - Map target
+
+#### MapMenuBar
+- Map target
+
+#### AddPlaneDialog
+- Map target
+- JPanel contentPanel
+- JTextField AltitudeField
+- JTextField SpeedField
+- JTextField MaxSpeedField
+- JTextField DirectionField
+- JTextField XField
+- JTextField YField
