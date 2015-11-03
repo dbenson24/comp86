@@ -35,7 +35,7 @@ public class Map extends JPanel {
 	private JFrame parent;
 	private boolean hasParent;
 	private Timer clock;
-	private TimerTask animate = new TimerTask() {
+	private class animate extends TimerTask {
 		@Override
 		public void run() {
 			for (Plane p : planes) {
@@ -108,7 +108,7 @@ public class Map extends JPanel {
 			clock = null;
 		}
 		clock = new Timer();
-		clock.scheduleAtFixedRate(animate, 0, 1000);
+		clock.scheduleAtFixedRate(new animate(), 0, 1000);
 	}
 	
 	@Override
@@ -173,7 +173,6 @@ public class Map extends JPanel {
 		temp.setMaxSpeed(maxSpeed);
 		planes.add(temp);
 	}
-	
 	
 	private void onClick() {
 		addMouseListener(new MouseAdapter() {

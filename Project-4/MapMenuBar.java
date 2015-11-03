@@ -68,6 +68,28 @@ public class MapMenuBar extends JMenuBar {
 		});
 		
 		mnEdit.add(mntmRemovePlane);
-	}
 
+		JMenuItem mntmPlay = new JMenuItem("Play");
+
+		JMenuItem mntmPause = new JMenuItem("Pause");
+		
+		mntmPlay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				target.startAnimation();
+				mntmPlay.setEnabled(false);
+				mntmPause.setEnabled(true);
+			}
+		});
+
+		mntmPause.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				target.pauseAnimation();
+				mntmPlay.setEnabled(true);
+				mntmPause.setEnabled(false);
+			}
+		});
+		mntmPlay.setEnabled(false);
+		mnEdit.add(mntmPlay);
+		mnEdit.add(mntmPause);
+	}
 }
