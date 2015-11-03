@@ -110,6 +110,7 @@ public class AddPlaneDialog extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				final Map map = this.target;
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent event) {
 						try {
@@ -125,8 +126,8 @@ public class AddPlaneDialog extends JDialog {
 							speed = speed * 100 / maxSpeed;
 							int direction = Integer.parseInt(DirectionField.getText());
 							direction = (direction % 360) * 100 / 359;
-							if (target != null) {
-								target.addPlane(x, y, altitude, speed, maxSpeed, direction);
+							if (map != null) {
+								map.addPlane(x, y, altitude, speed, maxSpeed, direction);
 							}
 						} catch (NumberFormatException e) {
 							System.out.println("You must enter integers when you create the plane");
