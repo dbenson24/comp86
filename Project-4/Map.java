@@ -146,6 +146,35 @@ public class Map extends JPanel {
 		}
 	}
 
+	
+	public void removeCurrent() {
+		planes.remove(current);
+		current = null;
+	}
+	
+	public void addRandomPlane() {
+		int randX = ThreadLocalRandom.current().nextInt(0, 1366);
+		int randY = ThreadLocalRandom.current().nextInt(0, 768);
+		Plane temp = new UAV(randX, randY);
+		temp.setAltitude(ThreadLocalRandom.current().nextInt(0, 100));
+		temp.setSpeed(ThreadLocalRandom.current().nextInt(0, 100));
+		temp.setDirection(ThreadLocalRandom.current().nextInt(0, 100));
+		temp.setID(ThreadLocalRandom.current().nextInt(0, 999999));
+		temp.setMaxSpeed(ThreadLocalRandom.current().nextInt(0, 650));
+		planes.add(temp);
+	}
+	
+	public void addPlane(int x, int y, int altitude, int speed, int maxSpeed, int direction) {
+		Plane temp = new UAV(x, y);
+		temp.setAltitude(altitude);
+		temp.setSpeed(speed);
+		temp.setDirection(direction);
+		temp.setID(ThreadLocalRandom.current().nextInt(0, 999999));
+		temp.setMaxSpeed(maxSpeed);
+		planes.add(temp);
+	}
+	
+	
 	private void onClick() {
 		addMouseListener(new MouseAdapter() {
 			@Override

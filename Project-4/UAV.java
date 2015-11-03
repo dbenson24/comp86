@@ -13,6 +13,7 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
 
@@ -62,26 +63,27 @@ public class UAV extends Plane {
 	}
 
 	public void draw(Graphics g) {
-		if (active) {
-			Color temp = g.getColor();
-			g.setColor(Color.RED);
-			g.fillPolygon(shape);
-			g.setColor(temp);
-		} else {
-			g.fillPolygon(shape);
-		}
-
+		Graphics2D g2d = (Graphics2D)g.create();
 		int lineHeight = 13;
 		String ID = Integer.toString(id);
 		int offset = (int)((((double)ID.length()) / 2.0)*7);
 		String dir = "Dir: " + (int)(359*((double)direction)/100);
 		String alt = "Alt: " + (int)(65000*((double)altitude)/100) + " ft";
 		String spd = "Speed: " + (int)(maxSpeed*((double)speed)/100) + " mph";
+		g2d.drawString(ID, x - offset, y - lineHeight);
+		g2d.drawString(dir, x + 35, y);
+		g2d.drawString(alt, x + 35, y + lineHeight);
+		g2d.drawString(spd, x + 35, y + 2 * lineHeight);
 		
-		g.drawString(ID, x - offset, y - lineHeight);
-		g.drawString(dir, x + 35, y);
-		g.drawString(alt, x + 35, y + lineHeight);
-		g.drawString(spd, x + 35, y + 2 * lineHeight);
-
+		g2d.rotate(Math.toRadians((double)direction / 100.0 * 359.0), x, y+25);
+		if (active) {
+			Color temp = g.getColor();
+			g2d.setColor(Color.RED);
+			g2d.fillPolygon(shape);
+			g2d.setColor(temp);
+		} else {
+			g2d.fillPolygon(shape);
+		}
+		
 	}
 }

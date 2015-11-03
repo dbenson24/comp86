@@ -54,24 +54,27 @@ public class Main {
 		frame.getContentPane().add(map, BorderLayout.CENTER);
 
 		/* Used to group the buttons together at the bottom */
-		JPanel directionalButtons = new JPanel();
-		frame.getContentPane().add(directionalButtons, BorderLayout.SOUTH);
+		JPanel controlPanel = new JPanel();
+		frame.getContentPane().add(controlPanel, BorderLayout.SOUTH);
 		
 		/* Used to group the combobox and slider together */
 		AttributeController ac = new AttributeController(map);
-		directionalButtons.add(ac);
+		controlPanel.add(ac);
 
 		DirectionalButton leftButton = new DirectionalButton("Left", map);
-		directionalButtons.add(leftButton);
+		controlPanel.add(leftButton);
 
 		DirectionalButton upButton = new DirectionalButton("Up", map);
-		directionalButtons.add(upButton);
+		controlPanel.add(upButton);
 
 		DirectionalButton downButton = new DirectionalButton("Down", map);
-		directionalButtons.add(downButton);
+		controlPanel.add(downButton);
 
 		DirectionalButton rightButton = new DirectionalButton("Right", map);
-		directionalButtons.add(rightButton);
+		controlPanel.add(rightButton);
+		
+		MapMenuBar menuBar = new MapMenuBar(map);
+		frame.setJMenuBar(menuBar);
 
 	}
 
