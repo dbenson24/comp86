@@ -25,7 +25,7 @@ public class AddPlaneDialog extends JDialog {
 	private JTextField DirectionField;
 	private JTextField XField;
 	private JTextField YField;
-	private Map target;
+	private final Map target;
 
 	/**
 	 * Launch the application.
