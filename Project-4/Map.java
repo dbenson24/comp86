@@ -44,8 +44,8 @@ public class Map extends JPanel {
 			refresh();
 		}
 	};
-	
-	
+
+
 	public Map() {
 		init();
 	}
@@ -101,7 +101,7 @@ public class Map extends JPanel {
 			clock = null;
 		}
 	}
-	
+
 	public void startAnimation() {
 		if (clock != null) {
 			clock.cancel();
@@ -110,13 +110,12 @@ public class Map extends JPanel {
 		clock = new Timer();
 		clock.scheduleAtFixedRate(new animate(), 0, 1000);
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		BufferedImage img = null;
 		try {
-			System.out.println();
 			File wd = new File(System.getProperty("user.dir"));
 			img = ImageIO.read(new File(wd, "cloud.png"));
 			g.drawImage(img, 50, 300, null);
@@ -146,12 +145,12 @@ public class Map extends JPanel {
 		}
 	}
 
-	
+
 	public void removeCurrent() {
 		planes.remove(current);
 		current = null;
 	}
-	
+
 	public void addRandomPlane() {
 		int randX = ThreadLocalRandom.current().nextInt(0, 1366);
 		int randY = ThreadLocalRandom.current().nextInt(0, 768);
@@ -163,7 +162,7 @@ public class Map extends JPanel {
 		temp.setMaxSpeed(ThreadLocalRandom.current().nextInt(0, 650));
 		planes.add(temp);
 	}
-	
+
 	public void addPlane(int x, int y, int altitude, int speed, int maxSpeed, int direction) {
 		Plane temp = new UAV(x, y);
 		temp.setAltitude(altitude);
@@ -173,7 +172,7 @@ public class Map extends JPanel {
 		temp.setMaxSpeed(maxSpeed);
 		planes.add(temp);
 	}
-	
+
 	private void onClick() {
 		addMouseListener(new MouseAdapter() {
 			@Override
