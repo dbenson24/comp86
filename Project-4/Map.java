@@ -21,6 +21,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.imageio.ImageIO;
@@ -32,7 +34,18 @@ public class Map extends JPanel {
 	private ArrayList<Plane> planes;
 	private JFrame parent;
 	private boolean hasParent;
-
+	private Timer clock;
+	private TimerTask animate = new TimerTask() {
+		@Override
+		public void run() {
+			for (Plane p : planes) {
+				p.tick();
+			}
+			refresh();
+		}
+	};
+	
+	
 	public Map() {
 		init();
 	}
@@ -61,7 +74,7 @@ public class Map extends JPanel {
 	private void init() {
 		current = null;
 		planes = new ArrayList<Plane>();
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 1; i++) {
 			int randX = ThreadLocalRandom.current().nextInt(0, 1366);
 			int randY = ThreadLocalRandom.current().nextInt(0, 768);
 			Plane temp = new UAV(randX, randY);
@@ -69,17 +82,35 @@ public class Map extends JPanel {
 			temp.setSpeed(ThreadLocalRandom.current().nextInt(0, 100));
 			temp.setDirection(ThreadLocalRandom.current().nextInt(0, 100));
 			temp.setID(ThreadLocalRandom.current().nextInt(0, 999999));
+			temp.setMaxSpeed(ThreadLocalRandom.current().nextInt(0, 650));
 			planes.add(temp);
 		}
 		hasParent = false;
 		setBackground(Color.CYAN);
 		onClick();
+		startAnimation();
 	}
 
 	public Plane getCurrent() {
 		return current;
 	}
 
+	public void pauseAnimation() {
+		if(clock != null) {
+			clock.cancel();
+			clock = null;
+		}
+	}
+	
+	public void startAnimation() {
+		if (clock != null) {
+			clock.cancel();
+			clock = null;
+		}
+		clock = new Timer();
+		clock.scheduleAtFixedRate(animate, 0, 1000);
+	}
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

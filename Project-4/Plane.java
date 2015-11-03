@@ -16,7 +16,7 @@ import java.awt.Point;
 
 public abstract class Plane {
 
-	protected int x, y, direction, speed, altitude, id;
+	protected int x, y, direction, speed, altitude, id, maxSpeed;
 
 	protected boolean active;
 
@@ -28,6 +28,7 @@ public abstract class Plane {
 		speed = 0;
 		altitude = 0;
 		id = 0;
+		maxSpeed = 0;
 	}
 
 	Plane(boolean active) {
@@ -38,6 +39,7 @@ public abstract class Plane {
 		speed = 0;
 		altitude = 0;
 		id = 0;
+		maxSpeed = 0;
 	}
 
 	Plane(boolean active, int x, int y) {
@@ -48,6 +50,7 @@ public abstract class Plane {
 		speed = 0;
 		altitude = 0;
 		id = 0;
+		maxSpeed = 0;
 	}
 
 	public void translate(int dx, int dy) {
@@ -89,6 +92,22 @@ public abstract class Plane {
 	
 	public int getID() {
 		return id;
+	}
+	
+	public void setMaxSpeed(int maxSpeed) {
+		this.maxSpeed = maxSpeed;
+	}
+	
+	public int getMaxSpeed() {
+		return maxSpeed;
+	}
+	
+	public void tick() {
+		double radians = Math.toRadians((double)direction / 100.0 * 359.0);
+		int dy = (int)((double)speed / 100 * maxSpeed * Math.cos(radians) / 20.0);
+		int dx = (int)((double)speed / 100 * maxSpeed * Math.sin(radians) / 20.0);
+		System.out.println("dx: " + dx + " dy: " + dy + " speed: " + speed + " direction: " + direction);
+		this.translate(dx, -dy);
 	}
 	
 	abstract void draw(Graphics g);

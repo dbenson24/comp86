@@ -76,7 +76,7 @@ public class UAV extends Plane {
 		int offset = (int)((((double)ID.length()) / 2.0)*7);
 		String dir = "Dir: " + (int)(359*((double)direction)/100);
 		String alt = "Alt: " + (int)(65000*((double)altitude)/100) + " ft";
-		String spd = "Speed: " + (int)(650*((double)speed)/100) + " mph";
+		String spd = "Speed: " + (int)(maxSpeed*((double)speed)/100) + " mph";
 		
 		g.drawString(ID, x - offset, y - lineHeight);
 		g.drawString(dir, x + 35, y);
