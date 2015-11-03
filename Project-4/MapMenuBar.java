@@ -65,9 +65,9 @@ public class MapMenuBar extends JMenuBar {
 
 		mnEdit.add(mntmRemovePlane);
 
-		JMenuItem mntmPlay = new JMenuItem("Play");
+		final JMenuItem mntmPlay = new JMenuItem("Play");
 
-		JMenuItem mntmPause = new JMenuItem("Pause");
+		final JMenuItem mntmPause = new JMenuItem("Pause");
 
 		mntmPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
