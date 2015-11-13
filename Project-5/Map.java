@@ -92,7 +92,7 @@ public class Map extends JPanel {
 		current = null;
 		scaleFactor = 1.0;
 		planes = new ArrayList<Plane>();
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 5; i++) {
 			addRandomPlane();
 		}
 		hasParent = false;
@@ -183,6 +183,7 @@ public class Map extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				Point p = e.getPoint();
+				System.out.println("Clicked on: " + p.toString());
 				for (Plane plane : planes) {
 					if (plane.contains(p)) {
 						if (current != null) {

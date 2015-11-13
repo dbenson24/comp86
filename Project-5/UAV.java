@@ -55,7 +55,10 @@ public class UAV extends Plane {
 
 	public boolean contains(Point p) {
 		p.translate((int)(-x * scaleFactor),(int)(-y * scaleFactor));
-		return shape.getBounds().contains(p);
+		System.out.println("translated to: " + p.toString());
+		boolean result = shape.getBounds().contains(p);
+		p.translate((int)(x * scaleFactor),(int)(y * scaleFactor));
+		return result;
 	}
 
 	public void translate(int dx, int dy) {
