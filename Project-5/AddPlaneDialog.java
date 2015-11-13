@@ -117,15 +117,10 @@ public class AddPlaneDialog extends JDialog {
 							int x = Integer.parseInt(XField.getText());
 							int y = Integer.parseInt(YField.getText());
 							int altitude = Integer.parseInt(AltitudeField.getText());
-							if (altitude > 65000) {
-								altitude = 65000;
-							}
-							altitude = altitude * 100 / 65000;
 							int maxSpeed = Integer.parseInt(MaxSpeedField.getText());
 							int speed = Integer.parseInt(SpeedField.getText());
-							speed = speed * 100 / maxSpeed;
 							int direction = Integer.parseInt(DirectionField.getText());
-							direction = (direction % 360) * 100 / 359;
+							direction = (direction % 360) * 100 / 360;
 							if (map != null) {
 								map.addPlane(x, y, altitude, speed, maxSpeed, direction);
 							}

@@ -79,30 +79,31 @@ public class AttributeController extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				/* Handle what happens when the comboBox is changed */
 				if (target.getCurrent() != null) {
+					slider.setEnabled(false);
 					switch ((String)comboBox.getSelectedItem()) {
 					case "altitude":
+						slider.setMaximum(target.getCurrent().getMaxAltitude());
 						slider.setValue(target.getCurrent().getAltitude());
 						break;
 					case "speed":
+						slider.setMaximum(target.getCurrent().getMaxSpeed());
 						slider.setValue(target.getCurrent().getSpeed());
 						break;
 					case "direction":
+						slider.setMaximum(360);
 						slider.setValue(target.getCurrent().getDirection());
 						break;
 					}
-					
+					slider.setEnabled(true);
 					target.refresh();
-				} else {
-					System.out.println("There is no current target");
 				}
-				System.out.println(comboBox.getSelectedItem());
 			}
 		});
 				
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				/* Handle what happens when the slider is changed */
-				if (target.getCurrent() != null) {
+				if (target.getCurrent() != null && slider.isEnabled()) {
 					switch ((String)comboBox.getSelectedItem()) {
 					case "altitude":
 						target.getCurrent().setAltitude(slider.getValue());
@@ -115,10 +116,7 @@ public class AttributeController extends JPanel {
 						break;
 					}
 					target.refresh();
-				} else {
-					System.out.println("There is no current target");
 				}
-				System.out.println(slider.getValue());
 			}
 		});
 		add(comboBox);
@@ -140,17 +138,22 @@ public class AttributeController extends JPanel {
 		super.paintComponent(g);
 		/* Make sure that the slider represents the state of the current plane */
 		if(target.getCurrent() != null) {
+			slider.setEnabled(false);
 			switch ((String)comboBox.getSelectedItem()) {
 			case "altitude":
+				slider.setMaximum(target.getCurrent().getMaxAltitude());
 				slider.setValue(target.getCurrent().getAltitude());
 				break;
 			case "speed":
+				slider.setMaximum(target.getCurrent().getMaxSpeed());
 				slider.setValue(target.getCurrent().getSpeed());
 				break;
 			case "direction":
+				slider.setMaximum(360);
 				slider.setValue(target.getCurrent().getDirection());
 				break;
 			}
+			slider.setEnabled(true);
 		} 
 	}
 }

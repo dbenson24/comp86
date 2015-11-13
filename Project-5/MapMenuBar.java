@@ -87,5 +87,40 @@ public class MapMenuBar extends JMenuBar {
 		mntmPlay.setEnabled(false);
 		mnEdit.add(mntmPlay);
 		mnEdit.add(mntmPause);
+		
+		
+		JMenu mnView = new JMenu("View");
+		add(mnView);
+		
+		JMenuItem mntmZoomIn = new JMenuItem("Zoom In");
+		
+		mntmZoomIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				target.setScaleFactor(target.getScaleFactor() * 0.5);
+			}
+		});
+		
+		mnView.add(mntmZoomIn);
+		
+		JMenuItem mntmZoomOut = new JMenuItem("Zoom Out");
+		
+		mntmZoomIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				target.setScaleFactor(target.getScaleFactor() * 2.0);
+			}
+		});
+		
+		mnView.add(mntmZoomOut);
+		
+		JMenuItem mntmZoomReset = new JMenuItem("Reset Zoom");
+		
+		mntmZoomIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				target.setScaleFactor(1.0);
+			}
+		});
+		
+		mnView.add(mntmZoomReset);
+		
 	}
 }

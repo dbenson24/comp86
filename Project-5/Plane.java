@@ -13,46 +13,51 @@
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.ArrayList;
 
 public abstract class Plane {
 
-	protected int x, y, direction, speed, altitude, id, maxSpeed;
-
+	protected int x, y, direction, id, speed, altitude, maxSpeed, maxAltitude;
+	
+	protected double scaleFactor;
+	
 	protected boolean active;
 
 	Plane(int x, int y) {
-		active = false;
+		init();
 		this.x = x;
 		this.y = y;
-		direction = 0;
-		speed = 0;
-		altitude = 0;
-		id = 0;
-		maxSpeed = 0;
 	}
 
 	Plane(boolean active) {
+		init();
 		this.active = active;
-		x = 0;
-		y = 0;
-		direction = 0;
-		speed = 0;
-		altitude = 0;
-		id = 0;
-		maxSpeed = 0;
 	}
-
+	
 	Plane(boolean active, int x, int y) {
+		init();
 		this.active = active;
 		this.x = x;
 		this.y = y;
+	}
+	
+	private void init() {
+		x = 0;
+		y = 0;
+		active = false;
 		direction = 0;
 		speed = 0;
 		altitude = 0;
 		id = 0;
 		maxSpeed = 0;
+		maxAltitude = 65000;
+		scaleFactor = 1;
 	}
 
+	public Point getPosition() {
+		return new Point(x, y);
+	}
+	
 	public void translate(int dx, int dy) {
 		x = x + dx;
 		y = y + dy;
@@ -63,21 +68,35 @@ public abstract class Plane {
 	}
 
 	public void setSpeed(int speed) {
-		this.speed = speed;
+		int s = (int)Math.round(speed / 20.0);
+		if (s < maxSpeed) {
+			this.speed = s;
+		} else {
+			this.speed = maxSpeed;
+		}
 	}
 
 	public int getSpeed() {
-		return speed;
+		return 20 * speed;
 	}
-
+	
+	
 	public void setAltitude(int altitude) {
-		this.altitude = altitude;
+		if (altitude < maxAltitude) {
+			this.altitude = altitude;
+		} else {
+			this.altitude = maxAltitude;
+		}
 	}
 
 	public int getAltitude() {
 		return altitude;
 	}
-
+	
+	public int getMaxAltitude() {
+		return maxAltitude;
+	}
+	
 	public void setDirection(int direction) {
 		this.direction = direction;
 	}
@@ -95,19 +114,29 @@ public abstract class Plane {
 	}
 	
 	public void setMaxSpeed(int maxSpeed) {
-		this.maxSpeed = maxSpeed;
+		int s = (int)Math.round(maxSpeed / 20.0);
+		this.maxSpeed = s;
+		if (speed > s) {
+			speed = s;
+		}
 	}
 	
 	public int getMaxSpeed() {
-		return maxSpeed;
+		return 20 * maxSpeed;
+	}
+	
+	public void setScaleFactor(double scaleFactor) {
+		this.scaleFactor = scaleFactor;
 	}
 	
 	public void tick() {
-		double radians = Math.toRadians((double)direction / 100.0 * 359.0);
-		int dy = (int)((double)speed / 100 * maxSpeed * Math.cos(radians) / 20.0);
-		int dx = (int)((double)speed / 100 * maxSpeed * Math.sin(radians) / 20.0);
+		double radians = Math.toRadians(direction);
+		int dy = (int) Math.round((double)speed * Math.cos(radians));
+		int dx = (int) Math.round((double)speed * Math.sin(radians));
 		this.translate(dx, -dy);
 	}
+	
+	abstract boolean colliding(ArrayList<Plane> planes);
 	
 	abstract void draw(Graphics g);
 

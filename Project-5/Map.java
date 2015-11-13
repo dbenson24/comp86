@@ -35,11 +35,20 @@ public class Map extends JPanel {
 	private JFrame parent;
 	private boolean hasParent;
 	private Timer clock;
+	private double scaleFactor;
 	private class animate extends TimerTask {
 		@Override
 		public void run() {
+			ArrayList<Plane> collided = new ArrayList<Plane>();
 			for (Plane p : planes) {
 				p.tick();
+				if (p.colliding(planes)) {
+					collided.add(p);
+				}
+			}
+			
+			for (Plane p : collided) {
+				planes.remove(p);
 			}
 			refresh();
 		}
@@ -73,17 +82,10 @@ public class Map extends JPanel {
 
 	private void init() {
 		current = null;
+		scaleFactor = 1.0;
 		planes = new ArrayList<Plane>();
 		for (int i = 0; i < 1; i++) {
-			int randX = ThreadLocalRandom.current().nextInt(0, 1366);
-			int randY = ThreadLocalRandom.current().nextInt(0, 768);
-			Plane temp = new UAV(randX, randY);
-			temp.setAltitude(ThreadLocalRandom.current().nextInt(0, 100));
-			temp.setSpeed(ThreadLocalRandom.current().nextInt(0, 100));
-			temp.setDirection(ThreadLocalRandom.current().nextInt(0, 100));
-			temp.setID(ThreadLocalRandom.current().nextInt(0, 999999));
-			temp.setMaxSpeed(ThreadLocalRandom.current().nextInt(0, 650));
-			planes.add(temp);
+			addRandomPlane();
 		}
 		hasParent = false;
 		setBackground(Color.CYAN);
@@ -155,21 +157,22 @@ public class Map extends JPanel {
 		int randX = ThreadLocalRandom.current().nextInt(0, 1366);
 		int randY = ThreadLocalRandom.current().nextInt(0, 768);
 		Plane temp = new UAV(randX, randY);
-		temp.setAltitude(ThreadLocalRandom.current().nextInt(0, 100));
-		temp.setSpeed(ThreadLocalRandom.current().nextInt(0, 100));
-		temp.setDirection(ThreadLocalRandom.current().nextInt(0, 100));
+		temp.setAltitude(ThreadLocalRandom.current().nextInt(0, 65000));
+		temp.setDirection(ThreadLocalRandom.current().nextInt(0, 360));
 		temp.setID(ThreadLocalRandom.current().nextInt(0, 999999));
-		temp.setMaxSpeed(ThreadLocalRandom.current().nextInt(0, 650));
+		int maxSpeed = ThreadLocalRandom.current().nextInt(250, 650);
+		temp.setMaxSpeed(maxSpeed);
+		temp.setSpeed(ThreadLocalRandom.current().nextInt(0, maxSpeed));
 		planes.add(temp);
 	}
 
 	public void addPlane(int x, int y, int altitude, int speed, int maxSpeed, int direction) {
 		Plane temp = new UAV(x, y);
 		temp.setAltitude(altitude);
-		temp.setSpeed(speed);
 		temp.setDirection(direction);
 		temp.setID(ThreadLocalRandom.current().nextInt(0, 999999));
 		temp.setMaxSpeed(maxSpeed);
+		temp.setSpeed(speed);
 		planes.add(temp);
 	}
 
@@ -191,5 +194,16 @@ public class Map extends JPanel {
 			}
 		});
 	}
-
+	
+	public double getScaleFactor() {
+		return scaleFactor;
+	}
+	
+	public void setScaleFactor(double scaleFactor) {
+		this.scaleFactor = scaleFactor;
+		System.out.println("Set scalefactor to: " + this.scaleFactor + " with: " + scaleFactor);
+		for (Plane p : planes) {
+			p.setScaleFactor(scaleFactor);
+		}
+	}
 }
