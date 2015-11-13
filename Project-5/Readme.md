@@ -1,5 +1,5 @@
-# Derek Benson - Project 3
-## Comp 86 - 10/23/2015
+# Derek Benson - Project 5
+## Comp 86 - 11/12/2015
 
 ## Running and Compiling
 
@@ -60,9 +60,10 @@ in order to create a new plane.
 
 #### MapMenuBar.java
 - Extends the swing MenuBar class.
-- THis class creates a menu bar at the top to give the user access to some
-extra functionality. Included in it is the File menu to close the program and
-the Edit menu with the option to Add a Plane, Remove Current Plane, Pause, or Play.
+- This class creates a menu bar at the top to give the user access to some
+extra functionality. Included in it is the File menu to close the program,
+the Edit menu with the option to Add a Plane, Remove Current Plane, Pause, or Play,
+and the view menu which manages scrolling.
 - The Play and Pause menu items are enabled or disabled depending on whether or
 not the animation is running.
 

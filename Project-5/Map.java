@@ -204,7 +204,6 @@ public class Map extends JPanel {
 	
 	public void setScaleFactor(double scaleFactor) {
 		this.scaleFactor = scaleFactor;
-		System.out.println("Set scalefactor to: " + this.scaleFactor + " with: " + scaleFactor);
 		for (Plane p : planes) {
 			p.setScaleFactor(scaleFactor);
 		}

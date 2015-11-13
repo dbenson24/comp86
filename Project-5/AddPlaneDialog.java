@@ -120,7 +120,7 @@ public class AddPlaneDialog extends JDialog {
 							int maxSpeed = Integer.parseInt(MaxSpeedField.getText());
 							int speed = Integer.parseInt(SpeedField.getText());
 							int direction = Integer.parseInt(DirectionField.getText());
-							direction = (direction % 360) * 100 / 360;
+							direction = direction % 360;
 							if (map != null) {
 								map.addPlane(x, y, altitude, speed, maxSpeed, direction);
 							}
