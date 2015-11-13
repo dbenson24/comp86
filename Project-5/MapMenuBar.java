@@ -96,7 +96,7 @@ public class MapMenuBar extends JMenuBar {
 		
 		mntmZoomIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				target.setScaleFactor(target.getScaleFactor() * 0.5);
+				target.setScaleFactor(target.getScaleFactor() * 2.0);
 			}
 		});
 		
@@ -104,9 +104,9 @@ public class MapMenuBar extends JMenuBar {
 		
 		JMenuItem mntmZoomOut = new JMenuItem("Zoom Out");
 		
-		mntmZoomIn.addActionListener(new ActionListener() {
+		mntmZoomOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				target.setScaleFactor(target.getScaleFactor() * 2.0);
+				target.setScaleFactor(target.getScaleFactor() * 0.5);
 			}
 		});
 		
@@ -114,7 +114,7 @@ public class MapMenuBar extends JMenuBar {
 		
 		JMenuItem mntmZoomReset = new JMenuItem("Reset Zoom");
 		
-		mntmZoomIn.addActionListener(new ActionListener() {
+		mntmZoomReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				target.setScaleFactor(1.0);
 			}

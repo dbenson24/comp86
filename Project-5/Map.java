@@ -36,6 +36,7 @@ public class Map extends JPanel {
 	private boolean hasParent;
 	private Timer clock;
 	private double scaleFactor;
+	private BufferedImage img;
 	private class animate extends TimerTask {
 		@Override
 		public void run() {
@@ -81,6 +82,13 @@ public class Map extends JPanel {
 	}
 
 	private void init() {
+		img = null;
+		try {
+			File wd = new File(System.getProperty("user.dir"));
+			img = ImageIO.read(new File(wd, "cloud.png"));
+		} catch (IOException e) {
+			System.out.println("cloud.png was not found, clouds will not be displayed");
+		}
 		current = null;
 		scaleFactor = 1.0;
 		planes = new ArrayList<Plane>();
@@ -116,17 +124,11 @@ public class Map extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		BufferedImage img = null;
-		try {
-			File wd = new File(System.getProperty("user.dir"));
-			img = ImageIO.read(new File(wd, "cloud.png"));
-			g.drawImage(img, 50, 300, null);
-			g.drawImage(img, 350, 375, null);
-			g.drawImage(img, 1000, 50, null);
-			g.drawImage(img, 900, 400, null);
-		} catch (IOException e) {
-			System.out.println("cloud.png was not found, clouds will not be displayed");
-		}
+		g.drawImage(img, (int)(scaleFactor * 50), (int)(scaleFactor * 300), null);
+		g.drawImage(img, (int)(scaleFactor * 350), (int)(scaleFactor * 375), null);
+		g.drawImage(img, (int)(scaleFactor * 1000), (int)(scaleFactor * 50), null);
+		g.drawImage(img, (int)(scaleFactor * 900), (int)(scaleFactor * 400), null);
+	
 		for (Plane plane : planes) {
 			plane.draw(g);
 		}
