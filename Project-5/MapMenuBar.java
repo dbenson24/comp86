@@ -24,7 +24,7 @@ public class MapMenuBar extends JMenuBar {
 		init();
 	}
 
-	public void init() {
+	private void init() {
 		JMenu mnNewMenu = new JMenu("File");
 		add(mnNewMenu);
 
