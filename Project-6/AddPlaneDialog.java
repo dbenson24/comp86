@@ -11,9 +11,12 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 /**
- * File: AddPlaneDialog.java Date: Nov 3, 2015 Author: Derek Email:
- * Derek.Benson@tufts.edu Description: TODO
- *
+ * File: AddPlaneDialog.java 
+ * Date: Nov 3, 2015 
+ * Author: Derek 
+ * Email: Derek.Benson@tufts.edu 
+ * Description:
+ * Implements a JDialog that allows the creation of a new plane.
  */
 
 public class AddPlaneDialog extends JDialog {

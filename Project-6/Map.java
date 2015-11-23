@@ -32,11 +32,13 @@ import javax.swing.JPanel;
 public class Map extends JPanel {
 	private Plane current;
 	private ArrayList<Plane> planes;
+	private ArrayList<Obstacle> obstacles;
 	private JFrame parent;
 	private boolean hasParent;
 	private Timer clock;
 	private double scaleFactor;
 	private BufferedImage img;
+	private Point center;
 	private class animate extends TimerTask {
 		@Override
 		public void run() {
@@ -45,6 +47,12 @@ public class Map extends JPanel {
 				p.tick();
 				if (p.colliding(planes)) {
 					collided.add(p);
+				}
+				
+				for (Obstacle o : obstacles) {
+					if (o.colliding(p.getPosition().x, p.getPosition().y, p.getAltitude())) {
+						collided.add(p);
+					}
 				}
 			}
 			
@@ -83,6 +91,7 @@ public class Map extends JPanel {
 
 	private void init() {
 		img = null;
+		center = new Point(0, 0);
 		try {
 			File wd = new File(System.getProperty("user.dir"));
 			img = ImageIO.read(new File(wd, "cloud.png"));
@@ -94,6 +103,10 @@ public class Map extends JPanel {
 		planes = new ArrayList<Plane>();
 		for (int i = 0; i < 5; i++) {
 			addRandomPlane();
+		}
+		obstacles = new ArrayList<Obstacle>();
+		for (int i = 0; i < 5; i++) {
+			addRandomObstacle();
 		}
 		hasParent = false;
 		setBackground(Color.CYAN);
@@ -124,11 +137,21 @@ public class Map extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		if(current == null) {
+			center = new Point(0, 0);
+		} else {
+			center = current.getPosition();
+		}
+		g.translate((int)(scaleFactor*(-center.x)) + this.getWidth()/2, (int)(scaleFactor*(-center.y)) + this.getHeight()/2);
 		g.drawImage(img, (int)(scaleFactor * 50), (int)(scaleFactor * 300), null);
 		g.drawImage(img, (int)(scaleFactor * 350), (int)(scaleFactor * 375), null);
 		g.drawImage(img, (int)(scaleFactor * 1000), (int)(scaleFactor * 50), null);
 		g.drawImage(img, (int)(scaleFactor * 900), (int)(scaleFactor * 400), null);
-	
+		
+		for (Obstacle o : obstacles) {
+			o.draw(g);
+		}
+		
 		for (Plane plane : planes) {
 			plane.draw(g);
 		}
@@ -167,7 +190,13 @@ public class Map extends JPanel {
 		temp.setSpeed(ThreadLocalRandom.current().nextInt(0, maxSpeed));
 		planes.add(temp);
 	}
-
+	
+	public void addRandomObstacle() {
+		Obstacle temp = new Mountain(ThreadLocalRandom.current().nextInt(0, 1200), ThreadLocalRandom.current().nextInt(0, 700), ThreadLocalRandom.current().nextInt(0, 27500));
+		temp.setScaleFactor(scaleFactor);
+		obstacles.add(temp);
+	}
+	
 	public void addPlane(int x, int y, int altitude, int speed, int maxSpeed, int direction) {
 		Plane temp = new UAV(x, y);
 		temp.setAltitude(altitude);
@@ -183,6 +212,7 @@ public class Map extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				Point p = e.getPoint();
+				p.translate((int)(scaleFactor*(center.x)) - getWidth()/2, (int)(scaleFactor*(center.y)) - getHeight()/2);
 				System.out.println("Clicked on: " + p.toString());
 				for (Plane plane : planes) {
 					if (plane.contains(p)) {
@@ -206,6 +236,9 @@ public class Map extends JPanel {
 		this.scaleFactor = scaleFactor;
 		for (Plane p : planes) {
 			p.setScaleFactor(scaleFactor);
+		}
+		for (Obstacle o : obstacles) {
+			o.setScaleFactor(scaleFactor);
 		}
 	}
 }
