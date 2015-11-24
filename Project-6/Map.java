@@ -29,6 +29,11 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 public class Map extends JPanel {
 	private Plane current;
 	private ArrayList<Plane> planes;
@@ -39,6 +44,8 @@ public class Map extends JPanel {
 	private double scaleFactor;
 	private BufferedImage img;
 	private Point center;
+	private Clip explosion;
+	AudioInputStream explosionInputStream;
 	private class animate extends TimerTask {
 		@Override
 		public void run() {
@@ -55,9 +62,21 @@ public class Map extends JPanel {
 					}
 				}
 			}
-			
+			boolean playSound = false;
 			for (Plane p : collided) {
-				planes.remove(p);
+				if(planes.remove(p)){
+					playSound = true;
+				}
+			}
+			
+			if (playSound) {
+			    try {
+				    explosion = AudioSystem.getClip();
+					explosion.open(explosionInputStream);
+				    explosion.start();
+				} catch (LineUnavailableException | IOException e) {
+					e.printStackTrace();
+				}
 			}
 			refresh();
 		}
@@ -105,11 +124,20 @@ public class Map extends JPanel {
 			addRandomPlane();
 		}
 		obstacles = new ArrayList<Obstacle>();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 15; i++) {
 			addRandomObstacle();
 		}
 		hasParent = false;
 		setBackground(Color.CYAN);
+		explosion = null;
+	    try {
+			File wd = new File(System.getProperty("user.dir"));
+			explosionInputStream =
+			    AudioSystem.getAudioInputStream(
+			    		new File(wd, "bomb.wav"));
+		} catch (UnsupportedAudioFileException | IOException e) {
+			e.printStackTrace();
+		}
 		onClick();
 		startAnimation();
 	}
@@ -143,10 +171,6 @@ public class Map extends JPanel {
 			center = current.getPosition();
 		}
 		g.translate((int)(scaleFactor*(-center.x)) + this.getWidth()/2, (int)(scaleFactor*(-center.y)) + this.getHeight()/2);
-		g.drawImage(img, (int)(scaleFactor * 50), (int)(scaleFactor * 300), null);
-		g.drawImage(img, (int)(scaleFactor * 350), (int)(scaleFactor * 375), null);
-		g.drawImage(img, (int)(scaleFactor * 1000), (int)(scaleFactor * 50), null);
-		g.drawImage(img, (int)(scaleFactor * 900), (int)(scaleFactor * 400), null);
 		
 		for (Obstacle o : obstacles) {
 			o.draw(g);
@@ -179,20 +203,20 @@ public class Map extends JPanel {
 	}
 
 	public void addRandomPlane() {
-		int randX = ThreadLocalRandom.current().nextInt(0, 1366);
-		int randY = ThreadLocalRandom.current().nextInt(0, 768);
+		int randX = ThreadLocalRandom.current().nextInt(-1000, 1000);
+		int randY = ThreadLocalRandom.current().nextInt(-750, 750);
 		Plane temp = new UAV(randX, randY);
 		temp.setAltitude(ThreadLocalRandom.current().nextInt(0, 65000));
 		temp.setDirection(ThreadLocalRandom.current().nextInt(0, 360));
 		temp.setID(ThreadLocalRandom.current().nextInt(0, 999999));
 		int maxSpeed = ThreadLocalRandom.current().nextInt(250, 650);
 		temp.setMaxSpeed(maxSpeed);
-		temp.setSpeed(ThreadLocalRandom.current().nextInt(0, maxSpeed));
+		temp.setSpeed(ThreadLocalRandom.current().nextInt(100, maxSpeed));
 		planes.add(temp);
 	}
 	
 	public void addRandomObstacle() {
-		Obstacle temp = new Mountain(ThreadLocalRandom.current().nextInt(0, 1200), ThreadLocalRandom.current().nextInt(0, 700), ThreadLocalRandom.current().nextInt(0, 27500));
+		Obstacle temp = new Mountain(ThreadLocalRandom.current().nextInt(-4000, 4000), ThreadLocalRandom.current().nextInt(-2000, 2000), ThreadLocalRandom.current().nextInt(0, 27500));
 		temp.setScaleFactor(scaleFactor);
 		obstacles.add(temp);
 	}
