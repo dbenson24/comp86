@@ -7,6 +7,45 @@ To build, execute: ```javac *.java```
 
 To run, execute: ```java Main```
 
+## Playing the game
+
+The game is very simple. When the application is run, 10 planes and 15 obstacles
+will randomly spawn onto the map. You start with 1,000 points and every tick
+you lose 20 points. For every plane you crash you gain points. It doesn't matter
+how you crash them, just make sure you crash each and every plane. Once you blow up
+all 10 planes another 10 will spawn in and the game continues.
+
+A crash occurs when two planes collide or when a plane collides into an obstacle.
+
+You can quickly test the respawn mechanism by just selecting plans and removing
+them via the edit menu.
+
+## UI Design
+
+I chose to use a standard menu bar that any user will be familiar with.
+
+It has 3 tabs:
+- File
+- Edit
+- View
+That group settings associated with each type of option.
+
+The add a plane feature creates a popup dialog so that the controls are not cluttered.
+
+All other controls are spread out so that the only manipulation of state that is
+required from the user is adjusting which attribute the user would like to change
+using the slider.
+
+The slider is also used in combination with the combobox to make sure that the user
+doesn't have to worry about minimum or maximum values and/or spelling the
+variable correctly.
+
+The score is written unobtrusively in the top left of the display, similar to
+many "scoreboard" experiences a user is likely to come across.
+
+All of the user inputs not related to the menus are grouped together at the
+bottom so that there is minimal searching.
+
 ## This project contains 8 source files
 
 #### Main.java
@@ -67,6 +106,16 @@ and the view menu which manages scrolling.
 - The Play and Pause menu items are enabled or disabled depending on whether or
 not the animation is running.
 
+#### Obstacle.java
+- This class defines the abstract Obstacle for use in building obstacles
+for planes to hit.
+
+#### Mountain.java
+- Extends the Obstacle class.
+- This class creates Mountains and draws them on the map.
+- This class also enables the map to determine whether a pair of coordinates
+and an altitude are in collision with the mountain.
+
 ## Inheritance Hierarchy
 
 #### Main
@@ -87,12 +136,17 @@ not the animation is running.
 #### AttributeController
 - AttributeController inherits from javax.swing.JPanel
 
-#### AddPlaneDialog.java
+#### AddPlaneDialog
 - AddPlaneDialog inherits from javax.swing.JDialog
 
-#### MapMenuBar.java
+#### MapMenuBar
 - MapMenuBar inherits from javax.swing.MenuBar
 
+#### Obstacle
+- Obstacle has no inheritance
+
+#### Mountain
+- Mountain inherits from Obstacle
 
 ## Aggregation Hierarchy
 ### Each of these classes reference:
@@ -118,6 +172,7 @@ not the animation is running.
 #### UAV
 - Polygon
 - Point
+- Color
 
 #### DirectionalButton
 - Map
@@ -139,6 +194,14 @@ not the animation is running.
 - JTextField
 - JButton
 - Map
+
+#### Obstacle
+- Graphics
+- Point
+
+#### Mountain
+- Polygon
+- Color
 
 ## Uses
 
@@ -165,8 +228,14 @@ and calling methods on that Map instance.
 - ArrayList<Plane> planes
 - JFrame parent
 - boolean hasParent
-- timer clock
+- Timer clock
 - TimerTask animate
+- double scaleFactor
+- Point center
+- Clip explosion
+- int score
+- File explosionInputFile
+
 
 #### Plane
 - int x
@@ -201,3 +270,12 @@ and calling methods on that Map instance.
 - JTextField DirectionField
 - JTextField XField
 - JTextField YField
+
+#### Obstacle
+- int x
+- int y
+- double scaleFactor
+
+#### Mountain
+- Polygon shape
+- int height

@@ -56,7 +56,7 @@ public class Map extends JPanel {
 				if (p.colliding(planes)) {
 					collided.add(p);
 				}
-				
+
 				for (Obstacle o : obstacles) {
 					if (o.colliding(p.getPosition().x, p.getPosition().y, p.getAltitude())) {
 						collided.add(p);
@@ -70,7 +70,7 @@ public class Map extends JPanel {
 					score += 1500;
 				}
 			}
-			
+
 			if (playSound) {
 			    try {
 				    explosion = AudioSystem.getClip();
@@ -162,11 +162,11 @@ public class Map extends JPanel {
 		clock.scheduleAtFixedRate(new animate(), 0, 1000);
 		refresh();
 	}
-	
+
 	public boolean isAnimating() {
 		return clock != null;
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -176,17 +176,17 @@ public class Map extends JPanel {
 			center = current.getPosition();
 		}
 		Graphics2D g2d = (Graphics2D) g.create();
-		g2d.setFont(new Font("TimesRoman", Font.PLAIN, 20)); 
+		g2d.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		g2d.drawString("Score: " + score, 10, 20);
 		g2d.drawString("Planes alive: " + planes.size(), 10, 40);
-		
+
 		g.translate((int)(scaleFactor*(-center.x)) + this.getWidth()/2, (int)(scaleFactor*(-center.y)) + this.getHeight()/2);
-		
-		
+
+
 		for (Obstacle o : obstacles) {
 			o.draw(g);
 		}
-		
+
 		for (Plane plane : planes) {
 			plane.draw(g);
 		}
@@ -225,13 +225,13 @@ public class Map extends JPanel {
 		temp.setSpeed(ThreadLocalRandom.current().nextInt(100, maxSpeed));
 		planes.add(temp);
 	}
-	
+
 	public void addRandomObstacle() {
 		Obstacle temp = new Mountain(ThreadLocalRandom.current().nextInt(-4000, 4000), ThreadLocalRandom.current().nextInt(-2000, 2000), ThreadLocalRandom.current().nextInt(0, 27500));
 		temp.setScaleFactor(scaleFactor);
 		obstacles.add(temp);
 	}
-	
+
 	public void addPlane(int x, int y, int altitude, int speed, int maxSpeed, int direction) {
 		Plane temp = new UAV(x, y);
 		temp.setAltitude(altitude);
@@ -242,13 +242,12 @@ public class Map extends JPanel {
 		planes.add(temp);
 	}
 
-	private void onClick() {		
+	private void onClick() {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				Point p = e.getPoint();
 				p.translate((int)(scaleFactor*(center.x)) - getWidth()/2, (int)(scaleFactor*(center.y)) - getHeight()/2);
-				System.out.println("Clicked on: " + p.toString());
 				for (Plane plane : planes) {
 					if (plane.contains(p)) {
 						if (current != null) {
@@ -262,11 +261,11 @@ public class Map extends JPanel {
 			}
 		});
 	}
-	
+
 	public double getScaleFactor() {
 		return scaleFactor;
 	}
-	
+
 	public void setScaleFactor(double scaleFactor) {
 		this.scaleFactor = scaleFactor;
 		for (Plane p : planes) {
