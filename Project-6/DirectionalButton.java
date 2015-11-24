@@ -1,4 +1,3 @@
-
 /**
  * File: DirectionButton.java
  * Date: Oct 7, 2015
@@ -12,6 +11,7 @@
  * that value to be customized.
  */
 
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -61,6 +61,17 @@ public class DirectionalButton extends JButton {
 		onClick();
 	}
 
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		if (target != null && target.isAnimating()) {
+			setEnabled(true);
+		} else {
+			setEnabled(false);
+		}
+	}
+	
+	
 	private void onClick() {
 		addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

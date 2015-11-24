@@ -1,19 +1,18 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.color.*;
-
 /**
  * File: Mountain.java
  * Date: Nov 16, 2015
  * Author: Derek
  * Email: Derek.Benson@tufts.edu
  * Description:
- * TODO
- *
+ * This is the method for a mountain. It extends the abstract
+ * obstacle class so that it can be combined with other obstacles.
  */
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Polygon;
 
 public class Mountain extends Obstacle {
 

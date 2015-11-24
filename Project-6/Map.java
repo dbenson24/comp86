@@ -17,8 +17,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LayoutManager;
 import java.awt.Point;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -30,14 +28,13 @@ import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 public class Map extends JPanel {
 	private Plane current;
 	private ArrayList<Plane> planes;
@@ -46,7 +43,6 @@ public class Map extends JPanel {
 	private boolean hasParent;
 	private Timer clock;
 	private double scaleFactor;
-	private BufferedImage img;
 	private Point center;
 	private Clip explosion;
 	private int score;
@@ -71,7 +67,7 @@ public class Map extends JPanel {
 			for (Plane p : collided) {
 				if(planes.remove(p)){
 					playSound = true;
-					score += 1000;
+					score += 1500;
 				}
 			}
 			
@@ -86,7 +82,7 @@ public class Map extends JPanel {
 					e.printStackTrace();
 				}
 			}
-			score -= 25;
+			score -= 20;
 			if(planes.isEmpty()) {
 				planes = new ArrayList<Plane>();
 				for (int i = 0; i < 10; i++) {
@@ -125,14 +121,7 @@ public class Map extends JPanel {
 
 	private void init() {
 		score = 0;
-		img = null;
 		center = new Point(0, 0);
-		try {
-			File wd = new File(System.getProperty("user.dir"));
-			img = ImageIO.read(new File(wd, "cloud.png"));
-		} catch (IOException e) {
-			System.out.println("cloud.png was not found, clouds will not be displayed");
-		}
 		current = null;
 		scaleFactor = 1.0;
 		planes = new ArrayList<Plane>();
@@ -160,6 +149,7 @@ public class Map extends JPanel {
 		if(clock != null) {
 			clock.cancel();
 			clock = null;
+			refresh();
 		}
 	}
 
@@ -170,8 +160,13 @@ public class Map extends JPanel {
 		}
 		clock = new Timer();
 		clock.scheduleAtFixedRate(new animate(), 0, 1000);
+		refresh();
 	}
-
+	
+	public boolean isAnimating() {
+		return clock != null;
+	}
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

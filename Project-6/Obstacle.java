@@ -1,15 +1,15 @@
-import java.awt.Graphics;
-import java.awt.Point;
-
 /**
  * File: Obstacle.java
  * Date: Nov 16, 2015
  * Author: Derek
  * Email: Derek.Benson@tufts.edu
  * Description:
- * TODO
- *
+ * This is the abstract class for an obstacle.
+ * Provides the methods for interacting with a generic obstacle.
  */
+
+import java.awt.Graphics;
+import java.awt.Point;
 
 public abstract class Obstacle {
 	
