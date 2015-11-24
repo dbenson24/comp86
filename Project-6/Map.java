@@ -78,8 +78,8 @@ public class Map extends JPanel {
 						    AudioSystem.getAudioInputStream(
 						    		explosionInputFile));
 				    explosion.start();
-				} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					System.err.println("The explosion audio file was unable to be played.");
 				}
 			}
 			score -= 20;
