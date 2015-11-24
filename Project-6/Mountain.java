@@ -58,9 +58,9 @@ public class Mountain extends Obstacle {
 	@Override
 	void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g.create();
-		g2d.scale(scaleFactor, scaleFactor);
 		g2d.translate(scaleFactor * x, scaleFactor * y);
 		g2d.setColor(Color.BLACK);
+		g2d.scale(scaleFactor, scaleFactor);
 		g2d.draw(shape);
 		g2d.drawString("Elevation: " + height + " ft", 0, -13);
 	}

@@ -12,9 +12,13 @@
  */
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.LayoutManager;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -45,7 +49,8 @@ public class Map extends JPanel {
 	private BufferedImage img;
 	private Point center;
 	private Clip explosion;
-	AudioInputStream explosionInputStream;
+	private int score;
+	private File explosionInputFile;
 	private class animate extends TimerTask {
 		@Override
 		public void run() {
@@ -66,16 +71,26 @@ public class Map extends JPanel {
 			for (Plane p : collided) {
 				if(planes.remove(p)){
 					playSound = true;
+					score += 1000;
 				}
 			}
 			
 			if (playSound) {
 			    try {
 				    explosion = AudioSystem.getClip();
-					explosion.open(explosionInputStream);
+					explosion.open(
+						    AudioSystem.getAudioInputStream(
+						    		explosionInputFile));
 				    explosion.start();
-				} catch (LineUnavailableException | IOException e) {
+				} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
 					e.printStackTrace();
+				}
+			}
+			score -= 25;
+			if(planes.isEmpty()) {
+				planes = new ArrayList<Plane>();
+				for (int i = 0; i < 10; i++) {
+					addRandomPlane();
 				}
 			}
 			refresh();
@@ -109,6 +124,7 @@ public class Map extends JPanel {
 	}
 
 	private void init() {
+		score = 0;
 		img = null;
 		center = new Point(0, 0);
 		try {
@@ -120,7 +136,7 @@ public class Map extends JPanel {
 		current = null;
 		scaleFactor = 1.0;
 		planes = new ArrayList<Plane>();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 10; i++) {
 			addRandomPlane();
 		}
 		obstacles = new ArrayList<Obstacle>();
@@ -130,14 +146,8 @@ public class Map extends JPanel {
 		hasParent = false;
 		setBackground(Color.CYAN);
 		explosion = null;
-	    try {
-			File wd = new File(System.getProperty("user.dir"));
-			explosionInputStream =
-			    AudioSystem.getAudioInputStream(
-			    		new File(wd, "bomb.wav"));
-		} catch (UnsupportedAudioFileException | IOException e) {
-			e.printStackTrace();
-		}
+		File wd = new File(System.getProperty("user.dir"));
+		explosionInputFile = new File(wd, "bomb.wav");
 		onClick();
 		startAnimation();
 	}
@@ -170,7 +180,13 @@ public class Map extends JPanel {
 		} else {
 			center = current.getPosition();
 		}
+		Graphics2D g2d = (Graphics2D) g.create();
+		g2d.setFont(new Font("TimesRoman", Font.PLAIN, 20)); 
+		g2d.drawString("Score: " + score, 10, 20);
+		g2d.drawString("Planes alive: " + planes.size(), 10, 40);
+		
 		g.translate((int)(scaleFactor*(-center.x)) + this.getWidth()/2, (int)(scaleFactor*(-center.y)) + this.getHeight()/2);
+		
 		
 		for (Obstacle o : obstacles) {
 			o.draw(g);
@@ -231,7 +247,7 @@ public class Map extends JPanel {
 		planes.add(temp);
 	}
 
-	private void onClick() {
+	private void onClick() {		
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
