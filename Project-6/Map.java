@@ -120,7 +120,7 @@ public class Map extends JPanel {
 	}
 
 	private void init() {
-		score = 0;
+		score = 1000;
 		center = new Point(0, 0);
 		current = null;
 		scaleFactor = 1.0;
