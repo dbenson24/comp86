@@ -20,6 +20,14 @@ A crash occurs when two planes collide or when a plane collides into an obstacle
 You can quickly test the respawn mechanism by just selecting plans and removing
 them via the edit menu.
 
+I implemented a sound effect when a plane crashes so that the user is alerted.
+
+I also implemented panning based on the currently selected plane, so when you
+select a plane the screen will automatically follow it's movements.
+
+The last thing that I implemented was mountains for the planes to crash into
+at lower altitudes.
+
 ## UI Design
 
 I chose to use a standard menu bar that any user will be familiar with.
