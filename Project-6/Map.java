@@ -227,7 +227,7 @@ public class Map extends JPanel {
 	}
 
 	public void addRandomObstacle() {
-		Obstacle temp = new Mountain(ThreadLocalRandom.current().nextInt(-4000, 4000), ThreadLocalRandom.current().nextInt(-2000, 2000), ThreadLocalRandom.current().nextInt(0, 27500));
+		Obstacle temp = new Mountain(ThreadLocalRandom.current().nextInt(-2000, 2000), ThreadLocalRandom.current().nextInt(-2000, 2000), ThreadLocalRandom.current().nextInt(0, 27500));
 		temp.setScaleFactor(scaleFactor);
 		obstacles.add(temp);
 	}
